@@ -1,7 +1,7 @@
 /* Magic Mirror
- * Module: Api
+ * Module:  MMM-Flashcards
  *
- * By Julian Zimmermann
+ * By Hua KRUNG
  * MIT Licensed.
  */
 
@@ -23,7 +23,7 @@ var session = {
 	stats : [],
 	history: [],
 	current:{},
-	nbLevel: 0,
+	nbBuckets: 0,
 	step: 3,
 } ;
 var allCollections =[];
@@ -112,10 +112,12 @@ module.exports = NodeHelper.create({
 	},
 
 	initialize: function(settings){
-		allCollections = settings.collections || [];
+		for(var i=0;i<settings.topics.length;i++){
+			allCollections[settings.topics[i].name] = settings.topics[i].cards;
+		}
 		allNames = Object.keys(allCollections);
 		console.log("Initialize Flashcards: " + allNames.length + " collection(s) loaded");
-		session.nbLevel = settings.nbLevel;
+		session.nbBuckets = settings.nbBuckets;
 		session.id_collection = 0;
 		session.step = settings.step>2?settings.step:2;
 
@@ -127,7 +129,7 @@ module.exports = NodeHelper.create({
 		session.flashcards = allCollections[collectionName];
 		console.log("Selected collection : "+ collectionName + " with " + session.flashcards.length + " flashcards.");
 		session.bucket=[];
-		for(i=0;i < session.nbLevel;i++){
+		for(i=0;i < session.nbBuckets;i++){
 			session.bucket.push([]);
 			range[i]=0;
 		}
@@ -181,8 +183,8 @@ module.exports = NodeHelper.create({
 
 	resetRange: function() {
 		var mx = 0;
-		for(i=0;i < session.nbLevel;i++){
-			mx += session.bucket[i].length>0?Math.pow(session.step,session.nbLevel - (1 + i)):0;
+		for(i=0;i < session.nbBuckets;i++){
+			mx += session.bucket[i].length>0?Math.pow(session.step,session.nbBuckets - (1 + i)):0;
 			range[i] = mx;
 		}
 //		console.log("bucket:", session.bucket);
@@ -195,7 +197,7 @@ module.exports = NodeHelper.create({
 		var idx = Math.floor(Math.random() * maxRange );
 		var level = -1;
 
-		for(i=0;i < session.nbLevel && level < 0;i++){
+		for(i=0;i < session.nbBuckets && level < 0;i++){
 			if( idx < range[i]){
 				level = i;
 			}
@@ -219,7 +221,7 @@ module.exports = NodeHelper.create({
 //		console.log("levelUp session.current ", session.current);
 		session.current.idFlashcard = session.bucket[session.current.level][session.current.idx];
 		session.current.newLevel = session.current.level;
-		if((session.current.level + 1) < session.nbLevel) {
+		if((session.current.level + 1) < session.nbBuckets) {
 			session.current.newLevel++;
 			session.current.newLevel = session.current.level + 1;
 			var flashcard = session.bucket[session.current.level].splice(session.current.idx,1);
@@ -233,13 +235,20 @@ module.exports = NodeHelper.create({
 	levelDown:  function(){
 //		console.log("levelDown session.current ", session.current);
 		session.current.idFlashcard = session.bucket[session.current.level][session.current.idx];
-		session.current.newLevel = session.current.level;
+		var flashcard = session.bucket[session.current.level].splice(session.current.idx,1);
+		session.current.newLevel = 0;
+		session.bucket[0].push(flashcard.pop());
+		maxRange = this.resetRange();
+
+		/*
+		session.current.newLevel = session.current.level;		
 		if((session.current.level - 1) >= 0) {
-			session.current.newLevel--;
+			session.current.newLevel = 0;
 			var flashcard = session.bucket[session.current.level].splice(session.current.idx,1);
 			session.bucket[session.current.level-1].push(flashcard.pop());
 			maxRange = this.resetRange();
-		}
+		}*/
+
 		session.history.push(session.current);
 	},
 

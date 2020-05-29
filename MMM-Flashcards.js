@@ -1,5 +1,3 @@
-/* global Log, Module, moment */
-
 /* Magic Mirror
  * Module: MMM-Flashcards
  *
@@ -10,12 +8,14 @@ Module.register("MMM-Flashcards", {
 
 	// Module config defaults.
 	defaults: {
-		header: "MMM-Flashcards by HKR",
-		settings: {
-			nbLevel: 4,
-			step: 3,
-			collections: {
-				"Addition" : [
+		header: "MMM-Flashcards by HKR",		
+		fadeSpeed: 1000,
+		nbBuckets: 4,
+		step: 3,
+		topics: [
+			{
+				"name": "Addition",
+				"cards": [
 					{
 						question: "1 + 1",
 						answer: "2"
@@ -128,61 +128,24 @@ Module.register("MMM-Flashcards", {
 						question: "2 + 5",
 						answer: "7"
 					},
-				],
-				"alphabet" : [
-					{
-						question : "A",
-						answer: "reponse:A"
-					},
-					{
-						question : "B",
-						answer: "reponse:B"
-					},
-					{
-						question : "C",
-						answer: "reponse:C"
-					},
-					{
-						question : "question 3",
-						answer: "reponse 3"
-					},
-					{
-						question : "question 4",
-						answer: "reponse 4"
-					},
-					{
-						question : "question 5",
-						answer: "reponse 5"
-					},
-					{
-						question : "question 6",
-						answer: "reponse 6"
-					},
-					{
-						question : "question 7",
-						answer: "reponse 7"
-					},
-					{
-						question : "question 8",
-						answer: "reponse 8"
-					},
-				],
+				]
 			},
-		},
-		fadeSpeed: 1000,
-		updateInterval: 30000
+
+		],
+		
 	},
 	keyBindings: {
 		enabled: true,
-		mode: "DEFAULT", 
+		mode: "DEFAULT",
 		map: {
 			correct: "ArrowRight",
 			wrong: "ArrowLeft",
 			flip: "Home",
-			prevCollection: "ArrowUp",
-			nextCollection: "ArrowDown",
+			prefTopic: "ArrowUp",
+			nextTopic: "ArrowDown",
 		}
 	},
+	settings:{},
 	allNames:[],
 	collection:"",
 	flashcard:{question:"",answer:""},
@@ -205,10 +168,10 @@ Module.register("MMM-Flashcards", {
 			console.log("flipkey");
 			this.showAnswer = !this.showAnswer;
 			this.updateDom();
-		} else if (kp.keyName == this.keyHandler.config.map.prevCollection){
-			this.prevCollection();
-		} else if (kp.keyName == this.keyHandler.config.map.nextCollection){
-			this.nextCollection();
+		} else if (kp.keyName == this.keyHandler.config.map.prefTopic){
+			this.prefTopic();
+		} else if (kp.keyName == this.keyHandler.config.map.nextTopic){
+			this.nextTopic();
 		}
 	},
 	hasFocus: function() {
@@ -218,7 +181,6 @@ Module.register("MMM-Flashcards", {
 		// Optional: Do something now that you lost focus.
 	},
 
-	
 	correctAnswer: function(){
 		this.sendSocketNotification("FLASHCARDS_CORRECT",{});
 	},
@@ -227,18 +189,22 @@ Module.register("MMM-Flashcards", {
 		this.sendSocketNotification("FLASHCARDS_WRONG",{});
 	},
 
-	prevCollection: function(){
+	prefTopic: function(){
 		this.sendSocketNotification("FLASHCARDS_PREVCOLLECTION",{});
 	},
-	nextCollection: function(){
+	nextTopic: function(){
 		this.sendSocketNotification("FLASHCARDS_NEXTCOLLECTION",{});
 	},
 
 	// Define start sequence.
 	start: function() {
 		var self = this;
-
-		this.sendSocketNotification("FLASHCARDS_INIT",this.config.settings);
+		console.log("this.config ",this.config);
+		this.settings.nbBuckets = this.config.nbBuckets;
+		this.settings.step = this.config.nbBuckets;
+		this.settings.topics = this.config.topics;
+		this.settings.collections = this.config.collections;
+		this.sendSocketNotification("FLASHCARDS_INIT",this.settings);
 	},
 
 	// Override dom generator.
@@ -252,9 +218,9 @@ Module.register("MMM-Flashcards", {
 		headerC.appendChild(header);
 		container.appendChild(headerC);
 
-		var flashcard =  document.createElement("div");
+		var flashcard = document.createElement("div");
 		flashcard.setAttribute("id","myFlashcard");
-//		flashcard.className="flip-card";
+		//		flashcard.className="flip-card";
 		flashcard.className=this.showAnswer?"flip-container flip":"flip-container";
 		var inner = document.createElement("div");
 		//inner.className="flip-card-inner";
