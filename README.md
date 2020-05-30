@@ -53,20 +53,24 @@ The following properties can be configured:
 | `header`                     | The header text <br><br> **Default value:** `'MMM-Flashcards by HKR'`
 | `nbBuckets`                  | Number of buckets to use **Default value:** `4`
 | `step`                       | Coefficient between 2 buckets. The higher the less frequent **Default value:** `3`
-| `topics:[`                   | Array of topics
-|  `{`                         | 
-|    `name`                    | Name of the topic
-|    `cards: [`                | Array of flashcards
-|      `{`                     | 
-|          `question`          | Question of the flashcard
-|          `answer`            | Answer of the flashcard
-|      `}, ...`                | 
-|                              | 
-|    `]`                       | 
-|  `}, ...`                    | 
-|                              | 
-| `]`                          | 
+| `topics`                     | Array of topics. See config below.
 | `fadeSpeed`                  | Fade speed in ms <br> **Default value:** `1000`
+
+## Topics config
+````javascript
+	topics:[
+		{
+			name: "topic's name",			//Name of the topic
+			cards: [						//Array of objects (question / answer)
+				{
+					question: "Question",	//Question 
+					answer: "Answer"		//Answer to the queestion
+				}
+			]
+		}
+
+	]
+````
 
 
 ## Config Example
@@ -81,8 +85,8 @@ The following properties can be configured:
 		step: 3,
 		topics: [
 			{
-				"name": "Learning addition",
-				"cards": [
+				name: "Learning addition",
+				cards: [
 					{
 						question: "1 + 1",
 						answer: "2"
@@ -94,7 +98,26 @@ The following properties can be configured:
 
 				]
 			},
-	
+
+			{
+				name: "French vocabulary",
+				cards: [
+					{
+						question: "Apple",
+						answer: "Pomme"
+					},
+					{
+						question: "To learn",
+						answer: "Apprendre"
+					},
+					{
+						question: "Vocabulary",
+						answer: "Vocabulaire"
+					},
+
+
+				]
+			},	
 		], 
 		fadeSpeed: 1000
       }
