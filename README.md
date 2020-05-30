@@ -2,9 +2,10 @@
 A [MagicMirror](https://magicmirror.builders) module for learning with Flashcards method.
 You can configure the number of buckets of the [Leitner system](https://en.wikipedia.org) to use.
 You can configure a coefficient to define how less frequent a card from a bucket to another will appear.
-You can load as many collections of flashcards as you want.
+You can load as many collections of flashcards as you want by providing the list of questions/answers in the config file of the module.
 
 This module is integrated with [MMM-KeyBindings](https://github.com/shbatm/MMM-KeyBindings) for keyboard control.
+
 
 ## About the Leitner System
 From the [Wikipedia page](http://en.wikipedia.org/wiki/Leitner_system): 
@@ -17,9 +18,11 @@ In this method flashcards are sorted into groups according to how well you know 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/dixyz/MMM-Flashcards/master/LICENSE)
 
  
-## Screenshot
+## Screenshots
 
-![Example](images/screenshot.png)
+![Question](images/flashcard_question.png)
+
+![Answer](images/flashcard_answer.png)
 
 
 ## Installation

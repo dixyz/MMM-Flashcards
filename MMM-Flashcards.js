@@ -8,7 +8,7 @@ Module.register("MMM-Flashcards", {
 
 	// Module config defaults.
 	defaults: {
-		header: "MMM-Flashcards by HKR",
+		header: "MMM-Flashcards",
 		fadeSpeed: 1000,
 		nbBuckets: 4,
 		step: 3,
