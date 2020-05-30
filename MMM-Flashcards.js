@@ -8,131 +8,46 @@ Module.register("MMM-Flashcards", {
 
 	// Module config defaults.
 	defaults: {
-		header: "MMM-Flashcards by HKR",		
+		header: "MMM-Flashcards by HKR",
 		fadeSpeed: 1000,
 		nbBuckets: 4,
 		step: 3,
 		topics: [
 			{
-				"name": "Addition",
-				"cards": [
+				name: "Learning addition",
+				cards: [
 					{
 						question: "1 + 1",
 						answer: "2"
 					},
 					{
-						question: "5 + 3",
-						answer: "8"
-					},
-					{
-						question: "3 + 1",
+						question: "2 + 2",
 						answer: "4"
 					},
-					{
-						question: "5 + 4",
-						answer: "9"
-					},
-					{
-						question: "5 + 5",
-						answer: "10"
-					},
-					{
-						question: "5 + 6",
-						answer: "11"
-					},
-					{
-						question: "5 + 7",
-						answer: "12"
-					},
-					{
-						question: "5 + 8",
-						answer: "13"
-					},
-					{
-						question: "5 + 9",
-						answer: "14"
-					},
-					{
-						question: "6 + 1",
-						answer: "7"
-					},
-					{
-						question: "6 + 2",
-						answer: "8"
-					},
-					{
-						question: "6 + 3",
-						answer: "9"
-					},
-					{
-						question: "6 + 4",
-						answer: "10"
-					},
-					{
-						question: "6 + 5",
-						answer: "11"
-					},
-					{
-						question: "6 + 6",
-						answer: "12"
-					},
-					{
-						question: "6 + 7",
-						answer: "13"
-					},
-					{
-						question: "6 + 8",
-						answer: "14"
-					},
-					{
-						question: "6 + 9",
-						answer: "15"
-					},
-					{
-						question: "7 + 1",
-						answer: "8"
-					},
-					{
-						question: "7 + 2",
-						answer: "9"
-					},
-					{
-						question: "7 + 3",
-						answer: "10"
-					},
-					{
-						question: "7 + 4",
-						answer: "11"
-					},
-					{
-						question: "7 + 7",
-						answer: "14"
-					},
-					{
-						question: "8 + 3",
-						answer: "11"
-					},
-					{
-						question: "9 + 1",
-						answer: "10"
-					},
-					{
-						question: "9 + 4",
-						answer: "13"
-					},
-					{
-						question: "9 + 1",
-						answer: "10"
-					},
-					{
-						question: "2 + 5",
-						answer: "7"
-					},
+
 				]
 			},
 
+			{
+				name: "French vocabulary",
+				cards: [
+					{
+						question: "Apple",
+						answer: "Pomme"
+					},
+					{
+						question: "To learn",
+						answer: "Apprendre"
+					},
+					{
+						question: "Vocabulary",
+						answer: "Vocabulaire"
+					},
+
+				]
+			},
 		],
-		
+
 	},
 	keyBindings: {
 		enabled: true,

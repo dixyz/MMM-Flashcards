@@ -81,6 +81,7 @@ The following properties can be configured:
       position: "top_left",
       config : {
 		header: "MMM-Flashcards by HKR",
+		fadeSpeed: 1000,
 		nbBuckets: 4,
 		step: 3,
 		topics: [
@@ -119,7 +120,6 @@ The following properties can be configured:
 				]
 			},	
 		], 
-		fadeSpeed: 1000
       }
     },
 ````
