@@ -53,7 +53,7 @@ The following properties can be configured:
 
 | Option                       | Description
 | ---------------------------- | -----------
-| `header`                     | The header text <br><br> **Default value:** `'MMM-Flashcards by HKR'`
+| `header`                     | The header text <br><br> **Default value:** `'MMM-Flashcards'`
 | `nbBuckets`                  | Number of buckets to use **Default value:** `4`
 | `step`                       | Coefficient between 2 buckets. The higher the less frequent **Default value:** `3`
 | `topics`                     | Array of topics. See config below.
@@ -61,18 +61,18 @@ The following properties can be configured:
 
 ## Topics config
 ````javascript
-	topics:[
-		{
-			name: "topic's name",			//Name of the topic
-			cards: [						//Array of objects (question / answer)
-				{
-					question: "Question",	//Question 
-					answer: "Answer"		//Answer to the queestion
-				}
-			]
-		}
+    topics:[
+        {
+            name: "topic's name",            //Name of the topic
+            cards: [                         //Array of objects (question / answer)
+                {
+                    question: "Question",    //Question 
+                    answer: "Answer"         //Answer to the queestion
+                }
+            ]
+        },
 
-	]
+    ]
 ````
 
 
@@ -83,7 +83,7 @@ The following properties can be configured:
       module: 'MMM-Flashcards',
       position: "top_left",
       config : {
-		header: "MMM-Flashcards by HKR",
+		header: "MMM-Flashcards",
 		fadeSpeed: 1000,
 		nbBuckets: 4,
 		step: 3,
@@ -131,17 +131,17 @@ The following properties can be configured:
 The default configuration for MMM-KeyBindings is below. This can be customized by adding to the normal module config.
 
 ````javascript
-	keyBindings: {
-		enabled: true,
-		mode: "DEFAULT",
-		map: {
-			correct: "ArrowRight",
-			wrong: "ArrowLeft",
-			flip: "Home",
-			prevTopic: "ArrowUp",
-			nextTopic: "ArrowDown",
-		}
-	}
+    keyBindings: {
+        enabled: true,
+        mode: "DEFAULT",
+        map: {
+            correct: "ArrowRight",    //The answer is correctly done
+            wrong: "ArrowLeft",       //The answer is not correct
+            flip: "Home",             //Flip the flashcard (show answer/question)
+            prevTopic: "ArrowUp",     //Change topic
+            nextTopic: "ArrowDown",   //Change topic
+        }
+    }
 ````
 
 ## Navigation
