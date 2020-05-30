@@ -120,14 +120,11 @@ module.exports = NodeHelper.create({
 		session.nbBuckets = settings.nbBuckets;
 		session.id_collection = 0;
 		session.step = settings.step>2?settings.step:2;
-
-//		console.log("session: ",session);
 	},
 
 	loadCollection: function(collectionName){
 
 		session.flashcards = allCollections[collectionName];
-		console.log("Selected collection : "+ collectionName + " with " + session.flashcards.length + " flashcards.");
 		session.bucket=[];
 		for(i=0;i < session.nbBuckets;i++){
 			session.bucket.push([]);
@@ -162,22 +159,18 @@ module.exports = NodeHelper.create({
 	},
 
 	correctAnswer: function(){
-//		console.log("Answer is correct !");
 		this.levelUp();
 		session.current = this.pickFlashcard();
 		var idF = session.bucket[session.current.level][session.current.idx];
 		session.stats[idF]++;
-//		console.log("Flashcard id: ", idF);
 		this.sendSocketNotification("FLASHCARDS_NEW",session.flashcards[idF]);
 	},
 
 	wrongAnswer: function(){
-//		console.log("Answer is not correct !");
 		this.levelDown();
 		session.current = this.pickFlashcard();
 		var idF = session.bucket[session.current.level][session.current.idx];
 		session.stats[idF]++;
-		//console.log("Flashcard id: ", idF);
 		this.sendSocketNotification("FLASHCARDS_NEW",session.flashcards[idF]);
 	},
 
@@ -187,9 +180,6 @@ module.exports = NodeHelper.create({
 			mx += session.bucket[i].length>0?Math.pow(session.step,session.nbBuckets - (1 + i)):0;
 			range[i] = mx;
 		}
-//		console.log("bucket:", session.bucket);
-//		console.log("range:", range);
-//		console.log("stats:", session.stats);
 		return mx;
 	},
 
@@ -211,14 +201,12 @@ module.exports = NodeHelper.create({
 	 * return flashcard.
 	 */
 	pickFlashcard: function() {
-//		console.log("Picking a new flashcard");
 		var level = this.pickLevel();
 		var idx = Math.floor(Math.random() * session.bucket[level].length);
 		return {level: level, idx: idx};
 	},
 
 	levelUp: function(){
-//		console.log("levelUp session.current ", session.current);
 		session.current.idFlashcard = session.bucket[session.current.level][session.current.idx];
 		session.current.newLevel = session.current.level;
 		if((session.current.level + 1) < session.nbBuckets) {
@@ -228,26 +216,16 @@ module.exports = NodeHelper.create({
 			session.bucket[session.current.level+1].push(flashcard.pop());
 			maxRange = this.resetRange();
 		}
-		session.history.push(session.current);
 
+		session.history.push(session.current);
 	},
 
 	levelDown:  function(){
-//		console.log("levelDown session.current ", session.current);
 		session.current.idFlashcard = session.bucket[session.current.level][session.current.idx];
 		var flashcard = session.bucket[session.current.level].splice(session.current.idx,1);
 		session.current.newLevel = 0;
 		session.bucket[0].push(flashcard.pop());
 		maxRange = this.resetRange();
-
-		/*
-		session.current.newLevel = session.current.level;		
-		if((session.current.level - 1) >= 0) {
-			session.current.newLevel = 0;
-			var flashcard = session.bucket[session.current.level].splice(session.current.idx,1);
-			session.bucket[session.current.level-1].push(flashcard.pop());
-			maxRange = this.resetRange();
-		}*/
 
 		session.history.push(session.current);
 	},

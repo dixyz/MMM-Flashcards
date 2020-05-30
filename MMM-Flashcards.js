@@ -80,7 +80,6 @@ Module.register("MMM-Flashcards", {
 		} else if (kp.keyName === this.keyHandler.config.map.wrong) {
 			this.wrongAnswer();
 		} else if (kp.keyName == this.keyHandler.config.map.flip){
-			console.log("flipkey");
 			this.showAnswer = !this.showAnswer;
 			this.updateDom();
 		} else if (kp.keyName == this.keyHandler.config.map.prefTopic){
@@ -114,7 +113,6 @@ Module.register("MMM-Flashcards", {
 	// Define start sequence.
 	start: function() {
 		var self = this;
-		console.log("this.config ",this.config);
 		this.settings.nbBuckets = this.config.nbBuckets;
 		this.settings.step = this.config.nbBuckets;
 		this.settings.topics = this.config.topics;
@@ -175,7 +173,6 @@ Module.register("MMM-Flashcards", {
 			this.showAnswer = false;
 			this.updateDom(self.config.fadeSpeed);
 		} else if(notification === "FLASHCARDS_COLLLECTION_LOADED"){
-			console.log("new collection ", payload);
 			this.collection = payload;
 			this.showAnswer = false;
 			this.updateDom(self.config.fadeSpeed);
