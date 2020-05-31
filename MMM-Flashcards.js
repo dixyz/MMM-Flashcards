@@ -2,7 +2,6 @@
  * Module: MMM-Flashcards
  *
  * By Hua KRUNG
- * MIT Licensed.
  */
 Module.register("MMM-Flashcards", {
 

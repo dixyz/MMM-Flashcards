@@ -14,9 +14,6 @@ The Leitner system is a widely used method to efficiently use flashcards that wa
 
 In this method flashcards are sorted into groups according to how well you know each one in the Leitner's learning box. This is how it works: you try to recall the solution written on a flashcard. If you succeed, you send the card to the next group. But if you fail, you send it back to the first group. __Each succeeding group has a longer period of time before you are required to revisit the cards.__
 
-
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/dixyz/MMM-Flashcards/master/LICENSE)
-
  
 ## Screenshots
 

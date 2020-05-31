@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/dixyz/MMM-Flashcards.git"
+    "url": "https://github.com/dixyz/MMM-Flashcards.git"
   },
   "author": "dixyz <dixyz@yahoo.fr>",
   "license": "MIT",
