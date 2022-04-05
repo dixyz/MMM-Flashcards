@@ -113,7 +113,7 @@ Module.register("MMM-Flashcards", {
 	start: function() {
 		var self = this;
 		this.settings.nbBuckets = this.config.nbBuckets;
-		this.settings.step = this.config.nbBuckets;
+		this.settings.step = this.config.step;
 		this.settings.topics = this.config.topics;
 		this.settings.collections = this.config.collections;
 		this.sendSocketNotification("FLASHCARDS_INIT",this.settings);
